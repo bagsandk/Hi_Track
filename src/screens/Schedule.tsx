@@ -239,14 +239,14 @@ export default function Schedule({navigation}) {
           justifyContent: 'space-between',
           marginTop: 30,
         }}>
-        <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
+        <Text style={{color: '#000', fontSize: 24, fontWeight: '600'}}>
           Jadwal
         </Text>
         <Image source={hiv} style={{width: 30, height: 30}} />
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
         <View style={{marginBottom: 10}}>
-          <Text style={{marginBottom: 2}}>Tanggal Mulai</Text>
+          <Text style={{color: '#000', marginBottom: 2}}>Tanggal Mulai</Text>
           <TouchableOpacity
             style={{
               borderWidth: 1,
@@ -255,13 +255,13 @@ export default function Schedule({navigation}) {
               padding: 13,
             }}
             onPress={showDatePickerStart}>
-            <Text style={{fontSize: 16}}>
+            <Text style={{color: '#000', fontSize: 16}}>
               {startDate ? startDate.substr(0, 10) : ''}
             </Text>
           </TouchableOpacity>
         </View>
         <View style={{marginBottom: 10}}>
-          <Text style={{marginBottom: 2}}>Tanggal Selesai</Text>
+          <Text style={{color: '#000', marginBottom: 2}}>Tanggal Selesai</Text>
           <TouchableOpacity
             style={{
               borderWidth: 1,
@@ -270,13 +270,13 @@ export default function Schedule({navigation}) {
               padding: 13,
             }}
             onPress={showDatePickerEnd}>
-            <Text style={{fontSize: 16}}>
+            <Text style={{color: '#000', fontSize: 16}}>
               {endDate ? endDate.substr(0, 10) : ''}
             </Text>
           </TouchableOpacity>
         </View>
         <View style={{marginBottom: 10}}>
-          <Text style={{marginBottom: 2}}>Waktu</Text>
+          <Text style={{color: '#000', marginBottom: 2}}>Waktu</Text>
           <TouchableOpacity
             style={{
               borderWidth: 1,
@@ -285,7 +285,7 @@ export default function Schedule({navigation}) {
               padding: 13,
             }}
             onPress={showTimePicker}>
-            <Text style={{fontSize: 16}}>
+            <Text style={{color: '#000', fontSize: 16}}>
               {selectedTime
                 ? selectedTime.toLocaleTimeString([], {
                     hour: '2-digit',
@@ -337,7 +337,9 @@ export default function Schedule({navigation}) {
             width: 150,
           }}
           onPress={handleSchedule}>
-          <Text style={{textAlign: 'center', fontSize: 16}}>Selesai</Text>
+          <Text style={{color: '#000', textAlign: 'center', fontSize: 16}}>
+            Selesai
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

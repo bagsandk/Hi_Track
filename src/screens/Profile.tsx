@@ -95,7 +95,7 @@ export default function Profil({navigation}) {
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
         <View style={{marginBottom: 10}}>
-          <Text style={{marginBottom: 2}}>Nama</Text>
+          <Text style={{marginBottom: 2, color: '#000'}}>Nama</Text>
           <RoundedTextInput
             placeholder="Masukkan Nama"
             value={name}
@@ -104,7 +104,7 @@ export default function Profil({navigation}) {
         </View>
 
         <View style={{marginBottom: 10}}>
-          <Text style={{marginBottom: 2}}>Umur</Text>
+          <Text style={{marginBottom: 2, color: '#000'}}>Umur</Text>
           <TouchableOpacity onPress={toggleModal}>
             <RoundedTextInput
               onFocus={toggleModal}
@@ -125,7 +125,10 @@ export default function Profil({navigation}) {
               <Text style={styles.closeButtonText}>Selesai</Text>
             </TouchableOpacity>
             <View style={{backgroundColor: '#fff', paddingVertical: 10}}>
-              <Picker selectedValue={age} onValueChange={handleAgeChange}>
+              <Picker
+                selectedValue={age}
+                style={{color: '#000'}}
+                onValueChange={handleAgeChange}>
                 {renderAgeOptions()}
               </Picker>
             </View>
@@ -136,14 +139,16 @@ export default function Profil({navigation}) {
         <TouchableOpacity
           disabled={age == '' || name == ''}
           style={{
-            marginBottom:40,
+            marginBottom: 40,
             borderRadius: 10,
             borderWidth: 2,
             padding: 10,
             width: 150,
           }}
           onPress={handleSchedule}>
-          <Text style={{textAlign: 'center', fontSize: 16}}>Selanjutnya</Text>
+          <Text style={{textAlign: 'center', fontSize: 16, color: '#000'}}>
+            Selanjutnya
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

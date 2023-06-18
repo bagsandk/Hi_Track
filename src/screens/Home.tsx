@@ -134,8 +134,8 @@ export default function Home({navigation}) {
             </View>
             <TouchableOpacity
               onPress={handleEdit}
-              style={{alignSelf: 'flex-end', margin: 10}}>
-              <Text style={{color: '#004AA1'}}>Edit</Text>
+              style={{alignSelf: 'flex-end'}}>
+              <Text style={{color: '#004AA1',padding:5}}>Edit</Text>
             </TouchableOpacity>
           </View>
           <Calendar

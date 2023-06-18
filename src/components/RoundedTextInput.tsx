@@ -10,6 +10,7 @@ const RoundedTextInput = (props: any) => {
         width:'100%',
         padding: 10,
         fontSize: 16,
+        color: '#000'
       }}
       {...props}
     />
