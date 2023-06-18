@@ -4,10 +4,11 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 class Notifications {
   constructor() {
     PushNotification.configure({
-      // (optional) Called when Token is generated (iOS and Android)
+      
       onRegister: function (token) {
-        // console.log('TOKEN:', token);
+        // console.log("TOKEN:", token);
       },
+
       onNotification: function (notification) {
         console.log('NOTIFICATION:', notification);
         notification.finish(PushNotificationIOS.FetchResult.NoData);
@@ -16,7 +17,7 @@ class Notifications {
         });
       },
       popInitialNotification: true,
-      requestPermissions: true,
+      requestPermissions: Platform.OS === 'ios',
       // IOS ONLY (optional): default: all - Permissions to register.
       permissions: {
         alert: true,
@@ -41,6 +42,7 @@ class Notifications {
 
   schduleNotification(date) {
     const day = date.toISOString().split('T')[0]
+    PushNotification.cancelAllLocalNotifications()
     PushNotification.localNotificationSchedule({
       channelId: 'reminders',
       title: '🔔 Pengingat!',

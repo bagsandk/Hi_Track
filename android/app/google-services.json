@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "590105277921",
+    "project_id": "hi-track-d8b87",
+    "storage_bucket": "hi-track-d8b87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590105277921:android:8904c98b1e7518fa500ea0",
+        "android_client_info": {
+          "package_name": "com.hi_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590105277921-p8itd3srcm9p0a12as67p9ghob8lv8uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8pS4MCJt59AosnMQ_p3oCW_6YuQLuzlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590105277921-p8itd3srcm9p0a12as67p9ghob8lv8uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

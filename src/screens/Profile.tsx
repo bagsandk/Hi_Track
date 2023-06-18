@@ -109,7 +109,6 @@ export default function Profil({navigation}) {
               // onBlur={toggleModal}
               editable={false}
               pointerEvents="none"
-              disabled
               placeholder="Masukkan Umur 14 - 70 tahun"
               value={age}
               keyboardType="numeric"
@@ -121,9 +120,9 @@ export default function Profil({navigation}) {
         <Modal visible={isModalVisible} animationType="slide" transparent>
           <View style={styles.modalContainer}>
             <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
-              <Text style={styles.closeButtonText}>Tutup</Text>
+              <Text style={styles.closeButtonText}>Selesai</Text>
             </TouchableOpacity>
-            <View style={{backgroundColor:'#fff'}}>
+            <View style={{backgroundColor:'#fff',paddingVertical:10}}>
             <Picker selectedValue={age} onValueChange={handleAgeChange}>
               {renderAgeOptions()}
             </Picker>
@@ -154,6 +153,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     alignContent: 'center',
+    backgroundColor: '#fff',
   },
   imageremovebgpreview$1: {
     display: 'flex',
@@ -192,8 +192,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   closeButton: {
+    borderTopWidth:0.2,
+    borderBottomWidth:0.2,
     backgroundColor: 'white',
-    paddingVertical: 16,
+    paddingVertical: 10,
     alignItems: 'center',
   },
   closeButtonText: {

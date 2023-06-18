@@ -82,9 +82,7 @@ export default function Schedule({navigation}) {
   };
 
   const handleSchedule = () => {
-    saveSchedule().then(() => {
-      navigation.navigate('Home');
-    });
+    saveSchedule().then(() => navigation.replace('Home'));
   };
 
   const loadSchedule = async () => {
@@ -177,8 +175,7 @@ export default function Schedule({navigation}) {
 
   const combineDateAndTime = (dateString, timeString) => {
     const [year, month, day] = dateString.split('-');
-    const [time, period] = timeString.split(' ');
-    let [hours, minutes] = time.split(':');
+    let [hours, minutes, period] = timeString.split(/:|\s+/);
 
     hours = parseInt(hours);
 
@@ -186,21 +183,15 @@ export default function Schedule({navigation}) {
       hours += 12; // Tambahkan 12 jam jika waktu adalah PM
     }
 
-    console.log(hours)
-
-    // console.log(year, (month - 1), day, hours, minutes);
     const combinedDate = new Date(year, month - 1, day, hours, minutes);
-    console.log(combinedDate)
 
     return combinedDate;
   };
 
   function convertTimeToDateFormat(timeString: string) {
     // Mendapatkan waktu dalam format 24 jam dari string waktu
-    const timeParts = timeString.split(' ');
-    const time = timeParts[0];
-    const meridiem = timeParts[1];
-    let [hours, minutes] = time.split(':');
+    let [hours, minutes, meridiem] = timeString.split(/:|\s+/);
+
 
     // Mengonversi waktu ke format 24 jam
     if (meridiem === 'PM' && hours !== '12') {
@@ -239,9 +230,6 @@ export default function Schedule({navigation}) {
         }}>
         <Text style={{fontSize: 24, fontWeight: '600'}}>Jadwal</Text>
         <Image source={hiv} style={{width: 30, height: 30}} />
-        <TouchableOpacity onPress={setNotif}>
-          <Text>Test</Text>
-        </TouchableOpacity>
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
         <View style={{marginBottom: 10}}>

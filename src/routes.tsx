@@ -24,8 +24,8 @@ const Routes = () => {
           component={Home}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Profil" component={Profile} />
-        <Stack.Screen name="Schedule" component={Schedule} />
+        <Stack.Screen name="Profil" component={Profile} options={{headerShown: false}} />
+        <Stack.Screen name="Schedule" options={{headerShown: false}} component={Schedule} />
         <Stack.Screen name="Calendar" component={CalendarScreen} />
       </Stack.Navigator>
     </NavigationContainer>

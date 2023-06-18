@@ -122,6 +122,9 @@ export default function CalendarScreen({route, navigation}: Props) {
           <Text style={{color: '#000'}}>
             {info ? (time ? time : '_') : '-'}
           </Text>
+          <Text style={{color: 'green'}}>
+            {info && (info.selected ? 'Sudah di Minum' : '')}
+          </Text>
         </View>
       </View>
       <View style={{alignSelf: 'center'}}>

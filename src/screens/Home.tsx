@@ -74,7 +74,7 @@ export default function Home({navigation}) {
     }
   };
   const handleEdit = () => {
-    navigation.navigate('Profil');
+    navigation.replace('Profil');
   };
 
   useFocusEffect(
@@ -126,7 +126,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
           </View>
           <Calendar
-            style={{width: 350}}
+            style={{width: 350,borderWidth:1,borderRadius:10}}
             onDayPress={handlePressDay}
             markedDates={{
               ...scheduleMark,
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     padding: 20,
+    backgroundColor:'#fff'
   },
   imageremovebgpreview$1: {
     display: 'flex',
