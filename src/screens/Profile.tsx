@@ -86,7 +86,7 @@ export default function Profil({navigation}) {
           flexDirection: 'row',
           alignContent: 'flex-end',
           justifyContent: 'space-between',
-          marginTop: 20,
+          marginTop: 30,
         }}>
         <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
           Profil
@@ -136,6 +136,7 @@ export default function Profil({navigation}) {
         <TouchableOpacity
           disabled={age == '' || name == ''}
           style={{
+            marginBottom:40,
             borderRadius: 10,
             borderWidth: 2,
             padding: 10,

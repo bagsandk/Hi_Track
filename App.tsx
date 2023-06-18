@@ -27,8 +27,8 @@ function App(): JSX.Element {
   return (
     <>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        barStyle="dark-content"
+        backgroundColor={Colors.lighter}
       />
       <Routes />
       <Toast />

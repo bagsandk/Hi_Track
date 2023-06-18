@@ -151,7 +151,7 @@ export default function Schedule({navigation}) {
   }
 
   function createMarkedDates(startDate: string, endDate: string) {
-    Notifications.cancelNotification()
+    Notifications.cancelNotification();
     const markedDates: any = {};
 
     // Mengubah tanggal menjadi objek Date
@@ -167,7 +167,7 @@ export default function Schedule({navigation}) {
             hour: '2-digit',
             minute: '2-digit',
           })
-        : '10:00 AM';
+        : '10:00';
       if (combineDateAndTime(formattedDate, time) > new Date(Date.now())) {
         setNotif(combineDateAndTime(formattedDate, time));
       }
@@ -180,16 +180,17 @@ export default function Schedule({navigation}) {
     const [year, month, day] = dateString.split('-');
     let [hours, minutes, period] = timeString.split(/:|\s+/);
 
-    hours = parseInt(hours);
+    if (period) {
+      hours = parseInt(hours);
 
-    if (period === 'PM' && hours != 12) {
-      hours += 12; // Tambahkan 12 jam jika waktu adalah PM
+      if (period === 'PM' && hours != 12) {
+        hours += 12; // Tambahkan 12 jam jika waktu adalah PM
+      }
+    } else {
+      [hours, minutes] = hours.split('.');
     }
 
-    console.log(year, month - 1, day, hours, minutes)
     const combinedDate = new Date(year, month - 1, day, hours, minutes);
-    console.log(combinedDate)
-    console.log(new Date(Date.now()))
 
     return combinedDate;
   };
@@ -198,20 +199,24 @@ export default function Schedule({navigation}) {
     // Mendapatkan waktu dalam format 24 jam dari string waktu
     let [hours, minutes, meridiem] = timeString.split(/:|\s+/);
 
-    // Mengonversi waktu ke format 24 jam
-    if (meridiem === 'PM' && hours !== '12') {
-      hours = String(Number(hours) + 12);
-    }
-    if (meridiem === 'AM' && hours === '12') {
-      hours = '00';
+    if (meridiem) {
+      if (meridiem === 'PM' && hours !== '12') {
+        hours = String(Number(hours) + 12);
+      }
+      if (meridiem === 'AM' && hours === '12') {
+        hours = '00';
+      }
+    } else {
+      [hours, minutes] = hours.split('.');
     }
 
     // Mendapatkan tanggal saat ini
     const currentDate = new Date();
 
     // Mengatur jam dan menit pada tanggal saat ini
-    currentDate.setHours(hours);
-    currentDate.setMinutes(minutes);
+    console.log(hours);
+    currentDate.setHours(parseInt(hours));
+    currentDate.setMinutes(parseInt(minutes));
 
     return currentDate;
   }
@@ -223,6 +228,7 @@ export default function Schedule({navigation}) {
   const setNotif = date => {
     Notifications.schduleNotification(date);
   };
+
   return (
     <View style={styles.root}>
       <View
@@ -231,7 +237,7 @@ export default function Schedule({navigation}) {
           flexDirection: 'row',
           alignContent: 'flex-end',
           justifyContent: 'space-between',
-          marginTop: 20,
+          marginTop: 30,
         }}>
         <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
           Jadwal
@@ -327,6 +333,7 @@ export default function Schedule({navigation}) {
             borderRadius: 10,
             borderWidth: 2,
             padding: 10,
+            marginBottom: 40,
             width: 150,
           }}
           onPress={handleSchedule}>
