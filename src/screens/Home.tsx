@@ -97,7 +97,7 @@ export default function Home({navigation}) {
               flexDirection: 'row',
               alignContent: 'flex-end',
               justifyContent: 'space-between',
-              marginTop: 20,
+              marginTop: 30,
             }}>
             <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
               Hi Track
@@ -139,7 +139,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
           </View>
           <Calendar
-            style={{width: 350, borderWidth: 1, borderRadius: 10}}
+            style={{width: '100%', borderWidth: 1, borderRadius: 10}}
             onDayPress={handlePressDay}
             markedDates={{
               ...scheduleMark,
