@@ -167,7 +167,9 @@ export default function Schedule({navigation}) {
             minute: '2-digit',
           })
         : '10:00 AM';
-      setNotif(combineDateAndTime(formattedDate, time));
+      if (combineDateAndTime(formattedDate, time) > new Date(Date.now())) {
+        setNotif(combineDateAndTime(formattedDate, time));
+      }
       start.setDate(start.getDate() + 1);
     }
     return markedDates;
@@ -191,7 +193,6 @@ export default function Schedule({navigation}) {
   function convertTimeToDateFormat(timeString: string) {
     // Mendapatkan waktu dalam format 24 jam dari string waktu
     let [hours, minutes, meridiem] = timeString.split(/:|\s+/);
-
 
     // Mengonversi waktu ke format 24 jam
     if (meridiem === 'PM' && hours !== '12') {
