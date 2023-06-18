@@ -4,6 +4,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Toast from 'react-native-toast-message';
 import hiv from '../assets/img/hiv.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Notifications from '../untils/notification';
 
 type SchduleType = {
   startDate: string;
@@ -162,10 +163,37 @@ export default function Schedule({navigation}) {
     while (start <= end) {
       const formattedDate = formatDate(start);
       markedDates[formattedDate] = {marked: true};
+      const time = selectedTime
+        ? selectedTime.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : '10:00 AM';
+      setNotif(combineDateAndTime(formattedDate, time));
       start.setDate(start.getDate() + 1);
     }
     return markedDates;
   }
+
+  const combineDateAndTime = (dateString, timeString) => {
+    const [year, month, day] = dateString.split('-');
+    const [time, period] = timeString.split(' ');
+    let [hours, minutes] = time.split(':');
+
+    hours = parseInt(hours);
+
+    if (period === 'PM' && hours != 12) {
+      hours += 12; // Tambahkan 12 jam jika waktu adalah PM
+    }
+
+    console.log(hours)
+
+    // console.log(year, (month - 1), day, hours, minutes);
+    const combinedDate = new Date(year, month - 1, day, hours, minutes);
+    console.log(combinedDate)
+
+    return combinedDate;
+  };
 
   function convertTimeToDateFormat(timeString: string) {
     // Mendapatkan waktu dalam format 24 jam dari string waktu
@@ -195,6 +223,10 @@ export default function Schedule({navigation}) {
   useEffect(() => {
     loadSchedule();
   }, []);
+
+  const setNotif = date => {
+    Notifications.schduleNotification(date);
+  };
   return (
     <View style={styles.root}>
       <View
@@ -207,6 +239,9 @@ export default function Schedule({navigation}) {
         }}>
         <Text style={{fontSize: 24, fontWeight: '600'}}>Jadwal</Text>
         <Image source={hiv} style={{width: 30, height: 30}} />
+        <TouchableOpacity onPress={setNotif}>
+          <Text>Test</Text>
+        </TouchableOpacity>
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
         <View style={{marginBottom: 10}}>

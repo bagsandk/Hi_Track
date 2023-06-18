@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import hiv from '../assets/img/hiv.png';
 import idi from '../assets/img/idi.png';
@@ -33,6 +40,7 @@ export default function Home({navigation}) {
     return `${d.getDate()} ${mount[d.getMonth()]} ${d.getFullYear()}`;
   };
   const loadSchedule = async () => {
+    console.log('x');
     try {
       const defaultValue = await AsyncStorage.getItem('scheduleMark');
       const prof = await AsyncStorage.getItem('profile');
@@ -68,68 +76,83 @@ export default function Home({navigation}) {
   const handleEdit = () => {
     navigation.navigate('Profil');
   };
+
   useFocusEffect(
     React.useCallback(() => {
       loadSchedule();
-    }, [scheduleMark]),
+    }, []),
   );
+
+  useEffect(() => {
+    loadSchedule();
+  }, []);
+
   return (
     <View style={styles.root}>
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            borderWidth: 1,
-            marginTop: 30,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            padding: 5,
-            marginBottom: 10,
-          }}>
-          <View style={{}}>
-            <Text style={{fontSize: 24, fontWeight: '600'}}>{name}</Text>
-            <Text>{age} tahun</Text>
-          </View>
+      <ScrollView>
+        <View style={{flex: 1}}>
+          <View
+            style={{
+              borderWidth: 1,
+              marginTop: 30,
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              padding: 5,
+              marginBottom: 10,
+            }}>
+            <View style={{}}>
+              <Text style={{fontSize: 24, fontWeight: '600'}}>
+                {name ? name : ' - '}
+              </Text>
+              <Text>{age ? age : ' - '} tahun</Text>
+            </View>
 
-          <View style={{marginTop: 5}}>
-            <Text style={{fontSize: 16, fontWeight: '600', color: '#595959'}}>
-              Jadwal :
-            </Text>
-            <Text style={{color: '#595959'}}>
-              {getHari(schedule.startDate)} - {getHari(schedule.endDate)}
-            </Text>
-            <Text style={{color: '#595959'}}>Setiap {schedule.time}</Text>
+            <View style={{marginTop: 5}}>
+              <Text style={{fontSize: 16, fontWeight: '600', color: '#595959'}}>
+                Jadwal :
+              </Text>
+              <Text style={{color: '#595959'}}>
+                {schedule.startDate ? getHari(schedule.startDate) : ' - '} -{' '}
+                {schedule.endDate ? getHari(schedule.endDate) : ' - '}
+              </Text>
+              <Text style={{color: '#595959'}}>
+                Setiap {schedule.time ? schedule.time : ' - '}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={handleEdit}
+              style={{alignSelf: 'flex-end', margin: 10}}>
+              <Text style={{color: '#004AA1'}}>Edit</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={handleEdit}
-            style={{alignSelf: 'flex-end', margin: 10}}>
-            <Text style={{color: '#004AA1'}}>Edit</Text>
-          </TouchableOpacity>
+          <Calendar
+            style={{width: 350}}
+            onDayPress={handlePressDay}
+            markedDates={{
+              ...scheduleMark,
+            }}
+          />
         </View>
-        <Calendar
-          style={{width: 350}}
-          onDayPress={handlePressDay}
-          markedDates={{
-            ...scheduleMark,
-          }}
-        />
-      </View>
-      <View>
-        <Image
-          source={hiv}
-          style={{
-            width: 50,
-            height: 50,
-            alignSelf: 'center',
-            justifyContent: 'flex-end',
-            alignContent: 'flex-end',
-          }}
-        />
-      </View>
-      <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}}>
-        <Image source={malahayati} style={styles.logo} />
-        <Image source={puskes} style={styles.logo} />
-        <Image source={idi} style={styles.logo} />
-      </View>
+        <View>
+          <Image
+            source={hiv}
+            style={{
+              marginTop: 20,
+              width: 50,
+              height: 50,
+              alignSelf: 'center',
+              justifyContent: 'flex-end',
+              alignContent: 'flex-end',
+            }}
+          />
+        </View>
+        <View
+          style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}}>
+          <Image source={malahayati} style={styles.logo} />
+          <Image source={puskes} style={styles.logo} />
+          <Image source={idi} style={styles.logo} />
+        </View>
+      </ScrollView>
     </View>
   );
 }

@@ -4,13 +4,31 @@ import hiv from '../assets/img/hiv.png';
 import malahayati from '../assets/img/malahayati.png';
 import puskes from '../assets/img/puskes.png';
 import idi from '../assets/img/idi.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splash({navigation}) {
+  const loadProfile = async () => {
+    try {
+      const defaultValue = await AsyncStorage.getItem('profile');
+      if (defaultValue !== null) {
+        setTimeout(() => {
+          navigation.replace('Home');
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigation.replace('Profil');
+        }, 2000);
+      }
+    } catch (error) {
+      console.log('Error loading default value:', error);
+      setTimeout(() => {
+        navigation.replace('Profil');
+      }, 2000);
+    }
+  };
+
   useEffect(() => {
-    // Simulasi penundaan selama 2 detik
-    setTimeout(() => {
-      navigation.replace('Profil');
-    }, 2000);
+    loadProfile();
   }, []);
 
   return (
@@ -65,4 +83,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-

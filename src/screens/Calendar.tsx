@@ -3,14 +3,19 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import hiv from '../assets/img/hiv.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function CalendarScreen({route, navigation}) {
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+type Props = NativeStackScreenProps<{}>;
+
+export default function CalendarScreen({route, navigation}: Props) {
+  const [info, setInfo] = useState(null);
   const [age, setAge] = useState(null);
   const [name, setName] = useState('');
   const [time, setTime] = useState('');
 
-  const {info, day} = route.params;
+  const {day} = route.params;
 
-  const getHari = dateString => {
+  const getHari = (dateString: string) => {
     var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
     const mount = [
       'Januari',
@@ -34,6 +39,7 @@ export default function CalendarScreen({route, navigation}) {
 
   const loadStorage = async () => {
     try {
+      const defaultValue = await AsyncStorage.getItem('scheduleMark');
       const prof = await AsyncStorage.getItem('profile');
       const sche = await AsyncStorage.getItem('schedule');
       if (prof !== null) {
@@ -45,6 +51,12 @@ export default function CalendarScreen({route, navigation}) {
         const scheduleValue = sche ? JSON.parse(sche) : null;
         const time = scheduleValue ? scheduleValue.time : '';
         setTime(time);
+      }
+      if (defaultValue !== null) {
+        const scheduleMark = defaultValue ? JSON.parse(defaultValue) : {};
+        if (scheduleMark.hasOwnProperty(day)) {
+          setInfo(scheduleMark[day]);
+        }
       }
     } catch (error) {
       console.log('Error loading default value:', error);
@@ -62,7 +74,7 @@ export default function CalendarScreen({route, navigation}) {
         updateScheduleMark[day] = {
           marked: true,
           selected: true,
-          selectedColor: 'blue',
+          selectedColor: '#86CA85',
         };
       }
       const scheduleMark = JSON.stringify(updateScheduleMark);
@@ -104,10 +116,12 @@ export default function CalendarScreen({route, navigation}) {
               marginBottom: 5,
               fontWeight: '500',
             }}>
-            {`${name} (${age})`}
+            {name ? `${name} (${age})` : '-'}
           </Text>
           <Text style={{color: '#000'}}>{getHari(day)}</Text>
-          <Text style={{color: '#000'}}>{info ? time : '-'}</Text>
+          <Text style={{color: '#000'}}>
+            {info ? (time ? time : '_') : '-'}
+          </Text>
         </View>
       </View>
       <View style={{alignSelf: 'center'}}>

@@ -15,7 +15,7 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Routes from './src/routes';
-import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,8 +31,7 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <Routes />
-      <Toast/>
-
+      <Toast />
     </>
   );
 }

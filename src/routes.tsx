@@ -6,12 +6,13 @@ import Profile from './screens/Profile';
 import Schedule from './screens/Schedule';
 import Home from './screens/Home';
 import CalendarScreen from './screens/Calendar';
+import {navigationRef} from '../src/components/RootNavigation';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
           name="Splash"
