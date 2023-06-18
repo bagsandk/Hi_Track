@@ -93,6 +93,19 @@ export default function Home({navigation}) {
         <View style={{flex: 1}}>
           <View
             style={{
+              width: '100%',
+              flexDirection: 'row',
+              alignContent: 'flex-end',
+              justifyContent: 'space-between',
+              marginTop: 20,
+            }}>
+            <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
+              Hi Track
+            </Text>
+            <Image source={hiv} style={{width: 30, height: 30}} />
+          </View>
+          <View
+            style={{
               borderWidth: 1,
               marginTop: 30,
               backgroundColor: '#fff',
@@ -101,14 +114,14 @@ export default function Home({navigation}) {
               marginBottom: 10,
             }}>
             <View style={{}}>
-              <Text style={{fontSize: 24, fontWeight: '600'}}>
+              <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
                 {name ? name : ' - '}
               </Text>
               <Text>{age ? age : ' - '} tahun</Text>
             </View>
 
             <View style={{marginTop: 5}}>
-              <Text style={{fontSize: 16, fontWeight: '600', color: '#595959'}}>
+              <Text style={{fontSize: 16, color: '#000', fontWeight: '600'}}>
                 Jadwal :
               </Text>
               <Text style={{color: '#595959'}}>
@@ -126,7 +139,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
           </View>
           <Calendar
-            style={{width: 350,borderWidth:1,borderRadius:10}}
+            style={{width: 350, borderWidth: 1, borderRadius: 10}}
             onDayPress={handlePressDay}
             markedDates={{
               ...scheduleMark,
@@ -161,7 +174,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     padding: 20,
-    backgroundColor:'#fff'
+    backgroundColor: '#fff',
   },
   imageremovebgpreview$1: {
     display: 'flex',

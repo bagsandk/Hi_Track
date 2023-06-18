@@ -88,7 +88,9 @@ export default function Profil({navigation}) {
           justifyContent: 'space-between',
           marginTop: 20,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '600'}}>Profil</Text>
+        <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
+          Profil
+        </Text>
         <Image source={hiv} style={{width: 30, height: 30}} />
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
@@ -122,10 +124,10 @@ export default function Profil({navigation}) {
             <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
               <Text style={styles.closeButtonText}>Selesai</Text>
             </TouchableOpacity>
-            <View style={{backgroundColor:'#fff',paddingVertical:10}}>
-            <Picker selectedValue={age} onValueChange={handleAgeChange}>
-              {renderAgeOptions()}
-            </Picker>
+            <View style={{backgroundColor: '#fff', paddingVertical: 10}}>
+              <Picker selectedValue={age} onValueChange={handleAgeChange}>
+                {renderAgeOptions()}
+              </Picker>
             </View>
           </View>
         </Modal>
@@ -192,8 +194,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   closeButton: {
-    borderTopWidth:0.2,
-    borderBottomWidth:0.2,
+    borderTopWidth: 0.2,
+    borderBottomWidth: 0.2,
     backgroundColor: 'white',
     paddingVertical: 10,
     alignItems: 'center',

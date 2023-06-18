@@ -102,7 +102,7 @@ export default function CalendarScreen({route, navigation}: Props) {
           justifyContent: 'space-between',
           marginTop: 20,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '600'}}>
+        <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
           {info ? 'Jadwal Minum Obat' : 'Tidak Ada Jadwal'}
         </Text>
         <Image source={hiv} style={{width: 30, height: 30}} />

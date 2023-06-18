@@ -229,7 +229,9 @@ export default function Schedule({navigation}) {
           justifyContent: 'space-between',
           marginTop: 20,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '600'}}>Jadwal</Text>
+        <Text style={{fontSize: 24, color: '#000', fontWeight: '600'}}>
+          Jadwal
+        </Text>
         <Image source={hiv} style={{width: 30, height: 30}} />
       </View>
       <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
