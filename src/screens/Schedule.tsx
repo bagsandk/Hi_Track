@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import hiv from '../assets/img/hiv.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Notifications from '../untils/notification';
+import * as RNLocalize from 'react-native-localize';
 
 type SchduleType = {
   startDate: string;
@@ -125,7 +126,7 @@ export default function Schedule({navigation}) {
       const newScheduleMark = createMarkedDates(start, end);
       const oldScheduleMark = await AsyncStorage.getItem('scheduleMark');
 
-      const old = oldScheduleMark ? JSON.parse(oldScheduleMark) : null;
+      const old = oldScheduleMark ? JSON.parse(oldScheduleMark) : {};
 
       const updateScheduleMark = {...newScheduleMark};
 
@@ -161,7 +162,7 @@ export default function Schedule({navigation}) {
     // Menyimpan tanggal sebagai kunci dan value { marked: true }
     while (start <= end) {
       const formattedDate = formatDate(start);
-      markedDates[formattedDate] = {marked: true};
+      markedDates[formattedDate] = {marked: true, selected: false};
       const time = selectedTime
         ? selectedTime.toLocaleTimeString([], {
             hour: '2-digit',
@@ -214,7 +215,6 @@ export default function Schedule({navigation}) {
     const currentDate = new Date();
 
     // Mengatur jam dan menit pada tanggal saat ini
-    console.log(hours);
     currentDate.setHours(parseInt(hours));
     currentDate.setMinutes(parseInt(minutes));
 
@@ -296,6 +296,7 @@ export default function Schedule({navigation}) {
           </TouchableOpacity>
         </View>
         <DateTimePickerModal
+          timeZoneOffsetInMinutes={0}
           isVisible={isDatePickerVisibleStart}
           mode="date"
           onConfirm={handleConfirmStart}
@@ -304,6 +305,7 @@ export default function Schedule({navigation}) {
 
         <DateTimePickerModal
           isVisible={isDatePickerVisibleEnd}
+          timeZoneOffsetInMinutes={0}
           mode="date"
           onConfirm={handleConfirmEnd}
           onCancel={hideDatePickerEnd}
