@@ -6,6 +6,7 @@ import hiv from '../assets/img/hiv.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Notifications from '../untils/notification';
 import * as RNLocalize from 'react-native-localize';
+import {formatDate} from '../untils/helperDate';
 
 type SchduleType = {
   startDate: string;
@@ -34,7 +35,7 @@ export default function Schedule({navigation}) {
   };
 
   const handleConfirmStart = (date: Date) => {
-    const selectedDate = date.toISOString();
+    const selectedDate = formatDate(date);
     if (!endDate || date <= new Date(endDate)) {
       setStartDate(selectedDate);
     } else {
@@ -56,7 +57,7 @@ export default function Schedule({navigation}) {
   };
 
   const handleConfirmEnd = (date: Date) => {
-    const selectedDate = date.toISOString();
+    const selectedDate = formatDate(date);
     if (!startDate || date >= new Date(startDate)) {
       setEndDate(selectedDate);
     } else {
@@ -143,13 +144,6 @@ export default function Schedule({navigation}) {
       console.log('Error loading default value:', error);
     }
   };
-
-  function formatDate(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
 
   function createMarkedDates(startDate: string, endDate: string) {
     Notifications.cancelNotification();
@@ -296,23 +290,24 @@ export default function Schedule({navigation}) {
           </TouchableOpacity>
         </View>
         <DateTimePickerModal
-          timeZoneOffsetInMinutes={0}
           isVisible={isDatePickerVisibleStart}
           mode="date"
+          date={startDate ? new Date(startDate) : new Date()}
           onConfirm={handleConfirmStart}
           onCancel={hideDatePickerStart}
         />
 
         <DateTimePickerModal
           isVisible={isDatePickerVisibleEnd}
-          timeZoneOffsetInMinutes={0}
           mode="date"
+          date={endDate ? new Date(endDate) : new Date()}
           onConfirm={handleConfirmEnd}
           onCancel={hideDatePickerEnd}
         />
         <DateTimePickerModal
           isVisible={isTimePickerVisible}
           mode="time"
+          date={selectedTime ? new Date(selectedTime) : new Date()}
           onConfirm={handleTimeConfirm}
           onCancel={hideTimePicker}
         />

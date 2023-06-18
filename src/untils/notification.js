@@ -1,6 +1,7 @@
 import PushNotification from 'react-native-push-notification';
 import {navigate} from '../components/RootNavigation';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import { formatDate } from './helperDate';
 class Notifications {
   constructor() {
     PushNotification.configure({
@@ -9,7 +10,8 @@ class Notifications {
       },
 
       onNotification: function (notification) {
-        console.log('NOTIFICATION:', notification);
+        
+        console.log('NOTIFICATION:', notification.data.day);
         notification.finish(PushNotificationIOS.FetchResult.NoData);
         navigate('Calendar', {
           day: notification.data.day,
@@ -43,7 +45,9 @@ class Notifications {
     PushNotification.cancelAllLocalNotifications();
   }
   schduleNotification(date) {
-    const day = date.toISOString().split('T')[0];
+    const day = formatDate(date)
+    console.log(date)
+    console.log(day)
     PushNotification.localNotificationSchedule({
       channelId: 'reminders',
       title: '🔔 Pengingat!',
