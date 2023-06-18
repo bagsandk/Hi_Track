@@ -151,6 +151,7 @@ export default function Schedule({navigation}) {
   }
 
   function createMarkedDates(startDate: string, endDate: string) {
+    Notifications.cancelNotification()
     const markedDates: any = {};
 
     // Mengubah tanggal menjadi objek Date
@@ -185,7 +186,10 @@ export default function Schedule({navigation}) {
       hours += 12; // Tambahkan 12 jam jika waktu adalah PM
     }
 
+    console.log(year, month - 1, day, hours, minutes)
     const combinedDate = new Date(year, month - 1, day, hours, minutes);
+    console.log(combinedDate)
+    console.log(new Date(Date.now()))
 
     return combinedDate;
   };
@@ -306,6 +310,12 @@ export default function Schedule({navigation}) {
         />
       </View>
       <View style={{alignSelf: 'flex-end'}}>
+        {/* <TouchableOpacity
+          onPress={() =>
+            Notifications.schduleNotification(new Date(Date.now() + 5 * 1000))
+          }>
+          <Text>Test</Text>
+        </TouchableOpacity> */}
         <TouchableOpacity
           disabled={
             endDate == null ||

@@ -4,7 +4,6 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 class Notifications {
   constructor() {
     PushNotification.configure({
-      
       onRegister: function (token) {
         // console.log("TOKEN:", token);
       },
@@ -40,9 +39,11 @@ class Notifications {
     });
   }
 
+  cancelNotification() {
+    PushNotification.cancelAllLocalNotifications();
+  }
   schduleNotification(date) {
-    const day = date.toISOString().split('T')[0]
-    PushNotification.cancelAllLocalNotifications()
+    const day = date.toISOString().split('T')[0];
     PushNotification.localNotificationSchedule({
       channelId: 'reminders',
       title: '🔔 Pengingat!',
